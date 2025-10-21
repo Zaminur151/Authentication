@@ -1,17 +1,16 @@
+import 'package:authentication/screen/authenticate/sign_in.dart';
 import 'package:flutter/material.dart';
 
-class _AuthenticateScreenState extends StatefulWidget {
-  const _AuthenticateScreenState({super.key});
+class AuthenticateSceen extends StatefulWidget {
+  const AuthenticateSceen({super.key});
 
   @override
-  State<_AuthenticateScreenState> createState() => __AuthenticateScreenStateState();
+  State<AuthenticateSceen> createState() => _AuthenticateSceenState();
 }
 
-class __AuthenticateScreenStateState extends State<_AuthenticateScreenState> {
+class _AuthenticateSceenState extends State<AuthenticateSceen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text('Authenticate Screen'),
-    );
+    return SignInScreen();
   }
 }

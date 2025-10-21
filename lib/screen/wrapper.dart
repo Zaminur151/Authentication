@@ -1,3 +1,4 @@
+import 'package:authentication/screen/authenticate/authenticate.dart';
 import 'package:authentication/screen/home/home.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,6 @@ class WrapperScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeScreenn();
+    return AuthenticateSceen();
   }
 }
