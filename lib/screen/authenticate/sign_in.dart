@@ -1,3 +1,4 @@
+import 'package:authentication/models/user_model.dart';
 import 'package:authentication/service/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +19,11 @@ class _SignInScreenState extends State<SignInScreen> {
       body: Center(
         child: ElevatedButton(
           onPressed: ()async{
-            User? result = await authService.signInAnony();
+            UserModel? result = await authService.signInAnony();
             if(result == null){
               print("sign in error");
             }else{
-              print(result);
+              print(result.uid);
               print("sign in success");
             }
           }, 
