@@ -10,6 +10,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
 
+  final _formkey = GlobalKey<FormState>();
   String email = '';
   String password = '';
   
@@ -19,26 +20,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
+          key: _formkey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
+              TextFormField(
+                validator: (val) => val!.isEmpty? 'Enter email' : null,              
                 onChanged: (val){
-                  email = val;
+                  setState(() {
+                    email = val;
+                  });
                 },
               ),
               SizedBox(height: 20,),
-              TextField(
+              TextFormField(
                 obscureText: true,
+                validator: (val) => val!.length < 6? 'enter atleast 6 digit' : null,
                 onChanged: (val){
-                  password = val;
+                  setState(() {
+                    password = val;
+                  });
+                  
                 },
               ),
               SizedBox(height: 20,),
               ElevatedButton(
                 onPressed: ()async{
-                  print(email);
-                  print(password);
+                  if(_formkey.currentState!.validate()){
+                    print(email);
+                    print(password);
+                  }
                   
                 }, 
                 child: Text("Register")
