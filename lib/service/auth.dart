@@ -5,6 +5,17 @@ class AuthService{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  //auth change stream
+  Stream<UserModel?> get user{
+    return _auth.authStateChanges().map((User? firebaseUser){
+      if(firebaseUser != null){
+        return UserModel.fromFirebaseUser(firebaseUser);
+      }else{
+        return null;
+      }
+    });
+  }
+
   // sign in anony
   Future<UserModel?> signInAnony() async{
     try {
