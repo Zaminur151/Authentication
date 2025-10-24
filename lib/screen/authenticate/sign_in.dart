@@ -13,40 +13,21 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   AuthService authService = AuthService();
 
-  String email = '';
-  String password = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Form(
-          child: Column(
-            children: [
-              TextField(
-                onChanged: (val){
-                  email = val;
-                },
-              ),
-              SizedBox(height: 20,),
-              TextField(
-                obscureText: true,
-                onChanged: (val){
-                  password = val;
-                },
-              ),
-              SizedBox(height: 20,),
-              ElevatedButton(
-                onPressed: ()async{
-                  print(email);
-                  print(password);
-                  
-                }, 
-                child: Text("SignIn")
-              ),
-            ],
-          ),
-        ),
+        child: ElevatedButton(
+          onPressed: ()async{
+            UserModel? result = await authService.signInAnony();
+            if(result == null){
+              print("sign in error");
+            }else{
+              print(result.uid);
+              print("sign in success");
+            }
+          }, 
+          child: Text("SignIn Anonymously")),
       ),
     );
   }
