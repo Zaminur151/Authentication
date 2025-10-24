@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  final Function toggle;
+  const RegisterScreen({super.key, required this.toggle});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -15,9 +16,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
      return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Form(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
                 onChanged: (val){
@@ -38,8 +41,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   print(password);
                   
                 }, 
-                child: Text("SignIn")
+                child: Text("Register")
               ),
+              Row(
+                children: [
+                  Text("already have an account?"),
+                  
+                  TextButton(
+                    onPressed: (){
+                      widget.toggle();
+                    }, 
+                    child: Text('Log In')
+                    )
+                ],
+              )
             ],
           ),
         ),

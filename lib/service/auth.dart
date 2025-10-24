@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthService{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  
 
   //auth change stream
   Stream<UserModel?> get userStream{
@@ -32,4 +33,6 @@ class AuthService{
   Future signOut() async{
     await _auth.signOut();
   }
+
+ 
 }

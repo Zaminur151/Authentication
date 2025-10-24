@@ -4,7 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+  final Function toggle;
+  const SignInScreen({super.key, required this.toggle});
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -19,31 +20,51 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Form(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
                 onChanged: (val){
-                  email = val;
+                  setState(() {
+                    email = val;
+                  });
                 },
               ),
               SizedBox(height: 20,),
               TextField(
                 obscureText: true,
                 onChanged: (val){
-                  password = val;
+                  setState(() {
+                    password = val;
+                  });
+                  
                 },
               ),
               SizedBox(height: 20,),
               ElevatedButton(
-                onPressed: ()async{
+                onPressed: (){
+                  
                   print(email);
                   print(password);
                   
                 }, 
                 child: Text("SignIn")
               ),
+              Row(
+                children: [
+                  Text("don't have an account?"),
+                  
+                  TextButton(
+                    onPressed: (){
+                      widget.toggle();
+                    }, 
+                    child: Text('Create account')
+                    )
+                ],
+              )
             ],
           ),
         ),
