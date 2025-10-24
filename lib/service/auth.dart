@@ -27,4 +27,9 @@ class AuthService{
       return null;
     }
   }
+
+  // sign out 
+  Future signOut() async{
+    await _auth.signOut();
+  }
 }
