@@ -6,7 +6,7 @@ class AuthService{
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //auth change stream
-  Stream<UserModel?> get user{
+  Stream<UserModel?> get userStream{
     return _auth.authStateChanges().map((User? firebaseUser){
       if(firebaseUser != null){
         return UserModel.fromFirebaseUser(firebaseUser);
