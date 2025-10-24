@@ -1,24 +1,20 @@
-import 'package:authentication/models/user_model.dart';
-import 'package:authentication/service/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
-  AuthService authService = AuthService();
+class _RegisterScreenState extends State<RegisterScreen> {
 
   String email = '';
   String password = '';
-
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+     return Scaffold(
       body: Center(
         child: Form(
           child: Column(
