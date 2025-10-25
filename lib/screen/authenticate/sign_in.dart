@@ -13,7 +13,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   AuthService authService = AuthService();
-
+  final _formkey = GlobalKey<FormState>();
   String email = '';
   String password = '';
 
@@ -23,10 +23,12 @@ class _SignInScreenState extends State<SignInScreen> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
+          key: _formkey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
+              TextFormField(
+                validator: (val) =>val!.isEmpty? "Enter email" : null,
                 onChanged: (val){
                   setState(() {
                     email = val;
@@ -34,8 +36,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 },
               ),
               SizedBox(height: 20,),
-              TextField(
+              TextFormField(
                 obscureText: true,
+                validator: (val) =>val!.length < 6? "Enter atleast 6 digits" : null,
                 onChanged: (val){
                   setState(() {
                     password = val;
@@ -45,11 +48,14 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               SizedBox(height: 20,),
               ElevatedButton(
-                onPressed: (){
-                  
+                onPressed: ()async{
                   print(email);
                   print(password);
-                  
+                  UserModel? res = await authService.signInWithEmailAndPass(email, password);
+                  if(res == null){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Error")));
+                    
+                  }   
                 }, 
                 child: Text("SignIn")
               ),

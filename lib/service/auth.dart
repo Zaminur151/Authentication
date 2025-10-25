@@ -24,16 +24,31 @@ class AuthService{
       User? user = userCre.user;
       return UserModel.fromFirebaseUser(user);
     } on Exception catch (e) {
-      print(e.toString());
+      //print(e.toString());
       return null;
     }
   }
 
   // sign in with email and pass
+  Future<UserModel?> signInWithEmailAndPass(String email, String password) async{
+    try {
+      UserCredential userCre= await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User? user = userCre.user;
+      return UserModel.fromFirebaseUser(user);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // create account with email and pass
   Future<UserModel?> createUserWithEmailAndPass(String email, String password) async{
-    UserCredential userCre= await _auth.createUserWithEmailAndPassword(email: email, password: password);
-    User? user = userCre.user;
-    return UserModel.fromFirebaseUser(user);
+    try {
+      UserCredential userCre= await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      User? user = userCre.user;
+      return UserModel.fromFirebaseUser(user);
+    } catch (e) {
+      return null;
+    }
   }
 
   // sign out 
