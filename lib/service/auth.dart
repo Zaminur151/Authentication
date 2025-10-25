@@ -29,6 +29,13 @@ class AuthService{
     }
   }
 
+  // sign in with email and pass
+  Future<UserModel?> createUserWithEmailAndPass(String email, String password) async{
+    UserCredential userCre= await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    User? user = userCre.user;
+    return UserModel.fromFirebaseUser(user);
+  }
+
   // sign out 
   Future signOut() async{
     await _auth.signOut();

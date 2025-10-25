@@ -1,3 +1,5 @@
+import 'package:authentication/models/user_model.dart';
+import 'package:authentication/service/auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -9,7 +11,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
+  AuthService auth = AuthService();
   final _formkey = GlobalKey<FormState>();
   String email = '';
   String password = '';
@@ -46,9 +48,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
               SizedBox(height: 20,),
               ElevatedButton(
                 onPressed: ()async{
-                  if(_formkey.currentState!.validate()){
+                  if(_formkey.currentState!.validate()) {
                     print(email);
                     print(password);
+                    UserModel? res= await auth.createUserWithEmailAndPass(email, password);
+                    if(res == null){
+                      print('Error');
+                    }else{
+                      print(res);
+                    }
                   }
                   
                 }, 
