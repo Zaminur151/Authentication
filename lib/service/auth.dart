@@ -1,4 +1,5 @@
 import 'package:authentication/models/user_model.dart';
+import 'package:authentication/service/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService{
@@ -45,6 +46,8 @@ class AuthService{
     try {
       UserCredential userCre= await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? user = userCre.user;
+      // create firestore document
+      await DatabaseService(user!.uid).updateData('Hasan', 'Andoid', 5);
       return UserModel.fromFirebaseUser(user);
     } catch (e) {
       return null;
